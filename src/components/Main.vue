@@ -3,6 +3,11 @@
       <Search
         @emitSearch="getCard($event)" 
       />
+      <div v-for="(card, index) in cards" :key="index" class="cards">
+          <div class="card">
+              {{card.original_title}}
+          </div>
+      </div>
   </div>
 </template>
 
@@ -16,7 +21,7 @@ export default {
         queryPath: 'https://api.themoviedb.org/3/search/movie',
         queryKey: '6a1be3e2f2a8c68b3ee64e9d5b7d296b',
         textSearch: '',
-        card: null,
+        cards: null,
     };
 },
     components: {
@@ -34,7 +39,7 @@ export default {
                     }
                 }
             ).then((result)=>{
-                this.card = result.data.results;
+                this.cards = result.data.results;
                 console.log(result.data.results);
             }).catch((error)=>{
                 console.log(error);
