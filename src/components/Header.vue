@@ -1,5 +1,8 @@
 <template>
   <header>
+    <div class="container">
+      <input type="text" v-model="textSearch" @keyup.enter="sendSearch()">
+  </div>
   </header>
 </template>
 
@@ -7,7 +10,15 @@
 export default {
     name: 'Header',
     data(){
-        
+        return{
+            textSearch:'',
+        };
+    },
+    methods: {
+        sendSearch(){
+            console.log(this.textSearch);
+            this.$emit('emitSearch', this.textSearch);
+        },
     },
 }
 </script>
