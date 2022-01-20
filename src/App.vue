@@ -21,17 +21,18 @@ data(){
         return {
         queryPath: 'https://api.themoviedb.org/3/search/',
         queryKey: '6a1be3e2f2a8c68b3ee64e9d5b7d296b',
+        language: 'it_IT',
         textSearch: '',
-        cards: null,
-        arrayFilm: null,
-        arraySeries: null,
+        cards: {
+          film : [],
+          series: [],
+        },
     };
 },
 watch:{
-  printCard(){
+  textSearch(){
     this.callMovies();
     this.callSeries();
-    this.mergeArray();
   }
 },
 
@@ -42,11 +43,12 @@ watch:{
           const movie = 'movie';
           const parametri= {
             api_key: this.queryKey,
+            language: this.language,
             query: this.textSearch
           }
             axios.get(`${this.queryPath}${movie}`, { params: parametri }
             ).then((result)=>{
-                this.arrayFilm = result.data.results;
+                this.cards.film = result.data.results;
                 console.log(result.data.results);
             }).catch((error)=>{
                 console.log(error);
@@ -58,11 +60,12 @@ watch:{
           const tv = 'tv';
           const parametri= {
             api_key: this.queryKey,
+            language: this.language,
             query: this.textSearch
           }
             axios.get(`${this.queryPath}${tv}`, { params: parametri }
             ).then((result)=>{
-                this.arraySeries = result.data.results;
+                this.cards.series = result.data.results;
                 console.log(result.data.results);
             }).catch((error)=>{
                 console.log(error);
@@ -73,10 +76,6 @@ watch:{
             if (text != '') {
             this.textSearch = text;
         }
-        },
-
-        mergeArray(){
-          this.cards = [...this.arrayFilm, ...this.arraySeries];
         },
 }, 
 }

@@ -1,27 +1,30 @@
 <template>
   <div class="container">
-      <div class="row">
-          <div v-for="(card, index) in cards" :key="index" class="cards col">
-            <div class="card">
-              <h2>{{card.title}}</h2>
-              <h3>{{card.original_title}}</h3>
-              <h4>{{card.original_language}}</h4>
-              <h4>{{card.vote_average}}</h4>
-            </div>
+      <div class="row row-col-3">
+          <Card
+          v-for="(film, index) in cards.film"
+          :key="index"
+          :arname="film"
+          />
+          <Card
+          v-for="(serie, index) in cards.series"
+          :key="index"
+          :arname="serie"
+          />
         </div>
-      </div>
   </div>
 </template>
 
 <script>
+import Card from './Card.vue';
 export default {
     name: 'Main',
-    data(){
-    
-},
-props: {
+    components:{
+        Card,
+    },
+    props: {
     cards: Array,
-}
+    },
 }
 </script>
 <style lang="scss">
