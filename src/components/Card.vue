@@ -1,10 +1,11 @@
 <template>
             <div class="card col-4">
-              <img :src="imgQuery + imgSize + arname.poster_path" alt="">  
+              <img :src="(imgQuery + imgSize + arname.poster_path === 'https://image.tmdb.org/t/p/w500/null') ? placeholder : imgQuery + imgSize + arname.poster_path" :alt="arname.title">  
               <h2>{{(arname.title) ? arname.title : arname.name}}</h2>
               <h3>{{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
               <i :class="'flag flag-' + country(arname.original_language)" />
               <h4>{{arname.vote_average}}</h4>
+              <h4>{{stars(arname.vote_average)}}</h4>
             </div>
 </template>
 
@@ -15,6 +16,7 @@ data(){
     return{
         imgQuery: 'https://image.tmdb.org/t/p/',
         imgSize: 'w500/',
+        placeholder: 'https://cdn.download.it/ms/static/images/poster-placeholder.png',
     }
 }, 
 props: {
@@ -31,6 +33,9 @@ methods: {
             return 'jp';
         }
         return nation;
+    },
+    stars(nstar){
+        return Math.round(nstar / 2);
     }
 } 
 }
