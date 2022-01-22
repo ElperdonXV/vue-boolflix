@@ -1,11 +1,10 @@
 <template>
-            <div class="card col-4">
-              <img :src="(imgQuery + imgSize + arname.poster_path === 'https://image.tmdb.org/t/p/w500/null') ? placeholder : imgQuery + imgSize + arname.poster_path" :alt="arname.title">  
+            <div class="card col-3 m-4 p-3">
+              <img :src="(imgQuery + imgSize + arname.poster_path === 'https://image.tmdb.org/t/p/w342/null') ? placeholder : imgQuery + imgSize + arname.poster_path" :alt="arname.title">  
               <h2>{{(arname.title) ? arname.title : arname.name}}</h2>
-              <h3>{{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
+              <h3 v-if="(arname.orginal_title !== undefined && arname.orginal_title !== arname.title || arname.name !== undefined && arname.original_name !== arname.name)">
+                  {{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
               <i :class="'flag flag-' + country(arname.original_language)" />
-              <h4>{{arname.vote_average}}</h4>
-              <h4>{{stars(arname.vote_average)}}</h4>
               <div class="stars">
                 <i
                 v-for="n in 5"
@@ -24,7 +23,7 @@ name: 'Card',
 data(){
     return{
         imgQuery: 'https://image.tmdb.org/t/p/',
-        imgSize: 'w500/',
+        imgSize: 'w342/',
         placeholder: 'https://cdn.download.it/ms/static/images/poster-placeholder.png',
     }
 }, 
@@ -52,6 +51,10 @@ methods: {
 
 <style lang="scss">
 @import '~mdb-ui-kit/css/mdb.min.css';
+    .card{
+        border-radius: 0px !important;
+        background-color: rgb(37, 37, 37) !important;
+    }
     .star{
         //display: inline;
         color: yellow;

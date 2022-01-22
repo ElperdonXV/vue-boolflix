@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
-      <div class="row row-col-3">
+  <main>
+    <div class="container-fluid p-5">
+      <div class="row d-flex  gap">
           <Card
           v-for="(film, index) in cards.film"
           :key="index"
@@ -12,7 +13,8 @@
           :arname="serie"
           />
         </div>
-  </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -28,4 +30,12 @@ export default {
 }
 </script>
 <style lang="scss">
+  main{
+    background-color: #141414;
+    .gap{
+      justify-content: space-between;
+      gap: 60px;
+      margin: 0 auto;
+    }
+  }
 </style>
