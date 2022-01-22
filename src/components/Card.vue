@@ -5,7 +5,7 @@
               <h3 v-if="(arname.orginal_title !== undefined && arname.orginal_title !== arname.title || arname.name !== undefined && arname.original_name !== arname.name)">
                   {{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
               <i :class="'flag flag-' + country(arname.original_language)" />
-              <div class="stars">
+              <div class="stars" :title="'Voto:' + ' ' + arname.vote_average">
                 <i
                 v-for="n in 5"
                 :key="n"
@@ -53,7 +53,7 @@ methods: {
 @import '~mdb-ui-kit/css/mdb.min.css';
     .card{
         border-radius: 0px !important;
-        background-color: rgb(37, 37, 37) !important;
+        background-color: rgb(24, 24, 24) !important;
     }
     .star{
         //display: inline;
