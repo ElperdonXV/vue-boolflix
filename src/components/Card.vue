@@ -5,9 +5,9 @@
                         <img :src="(imgQuery + imgSize + arname.poster_path === 'https://image.tmdb.org/t/p/w342/null') ? placeholder : imgQuery + imgSize + arname.poster_path" :alt="arname.title">
                     </div>
                     <div class="description">
-                        <h2>{{(arname.title) ? arname.title : arname.name}}</h2>
+                        <h2>Titolo: {{(arname.title) ? arname.title : arname.name}}</h2>
                         <h3 v-if="(arname.orginal_title !== undefined && arname.orginal_title !== arname.title || arname.name !== undefined && arname.original_name !== arname.name)">
-                        {{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
+                        Titolo originale: {{(arname.original_title) ? arname.original_title : arname.original_name}}</h3>
                         <i :class="'flag flag-' + country(arname.original_language)" />
                         <div class="stars" :title="'Voto:' + ' ' + arname.vote_average">
                             <i
@@ -17,6 +17,7 @@
                                 class="star"
                             />
                         </div>
+                        <p>{{arname.overview}}</p>
                     </div>
                 </div>
             </div>
@@ -63,18 +64,35 @@ methods: {
         height: 100%;
         .description{
             position: absolute;
-            top: 0;
+            //top: 0;
             left: 0;
+            bottom: 0;
             z-index: 2;
             width: 100%;
-            height: 100%;
-            background-color: rgba($color: #444444, $alpha: 0.9);
-            opacity: 0;
+            //height: 100%;
+            padding: 15px;
+            background-color: rgba($color: #272727, $alpha: 0.9);
+            animation-name: opacity;
+            animation-duration: 1s;
+            display: none;
+            h2,h3,p {
+                color: white;
+            }
+            h2{
+                font-size: 1.5em;
+            }
+            h3{
+                font-size: 1.1em;
+            }
         }
     }
+    @keyframes opacity {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+    }
     .card:hover .description{
-            opacity: 100;
-        }
+            display: block;
+    }
     .image{
         width: 100%;
         img{
